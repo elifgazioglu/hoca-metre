@@ -1,0 +1,19 @@
+.navbar {
+    background-color: #312B5E;
+
+    .brand,
+    .nav-link {
+        color: white;
+
+        &:hover {
+            color: #E8BD82;
+            text-decoration: underline;
+        }
+    }
+
+    .white-toggle {
+        background-color: white;
+        color: #E8BD82;
+        /* Butonun metin rengini ayarlayın, isteğe bağlı olarak siyah yapabilirsiniz. */
+    }
+}
