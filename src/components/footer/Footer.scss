@@ -1,0 +1,48 @@
+footer {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 10px;
+    background-color: #333;
+    color: #fff;
+
+    a {
+        font-size: 20px;
+        color: white;
+        text-decoration: none;
+
+        &:hover{
+            color: #E8BD82;
+        }
+    }
+
+    div:last-child {
+        h4 {
+            margin: 10px 30px 0px;
+        }
+
+        form {
+            display: flex;
+            flex-direction: column;
+            width: 500px;
+            margin: 30px;
+
+            input[type="email"],
+            textarea {
+                margin-bottom: 10px;
+                padding: 5px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+
+            button {
+                background-color: #007bff;
+                color: #fff;
+                width: 200px;
+                border: none;
+                padding: 10px 20px;
+                cursor: pointer;
+            }
+        }
+    }
+}
