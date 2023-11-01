@@ -1,19 +1,57 @@
 .navbar {
     background-color: #312B5E;
 
+    .profile-side {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .profile-img {
+            width: 30px;
+            height: 30px;
+            object-fit: cover;
+            border-radius: 20px;
+        }
+    }
+
+
     .brand,
     .nav-link {
         color: white;
+        display: flex;
+        align-items: center;
+        justify-content: center;
 
         &:hover {
             color: #E8BD82;
             text-decoration: underline;
         }
+
+        .list-item {
+            img {
+                margin-right: 10px;
+            }
+
+            img,
+            svg {
+                vertical-align: middle;
+                width: 30px;
+                height: 30px;
+                object-fit: cover;
+                border-radius: 20px;
+            }
+        }
     }
 
-    .white-toggle {
-        background-color: white;
-        color: #E8BD82;
-        /* Butonun metin rengini ayarlayın, isteğe bağlı olarak siyah yapabilirsiniz. */
+
+
+
+    .navDropdown {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        border: solid 1px white;
+        border-radius: 20px;
     }
 }

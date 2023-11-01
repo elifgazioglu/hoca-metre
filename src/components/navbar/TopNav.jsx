@@ -1,11 +1,13 @@
 import React from "react";
 import "./TopNav.scss";
+import axios from "axios";
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import NavLink from "react-bootstrap/esm/NavLink";
+import { useEffect } from "react";
 
 const TopNav = () => {
   const menuData = [
@@ -13,18 +15,26 @@ const TopNav = () => {
     { path: "/login", name: "Login" },
     { path: "/register", name: "Register" },
   ];
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8000/api/auth/email`);
+      } catch (err) {}
+    };
+  });
+
+  const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
   return (
     <>
       {["lg"].map((expand) => (
         <Navbar key={expand} expand={expand} className="navbar">
-          <Container fluid>
+          <Container fluid className="container">
             <Navbar.Brand href="/" className="brand">
               Hoca Metre
             </Navbar.Brand>
-            <Navbar.Toggle
-              aria-controls={`offcanvasNavbar-expand-${expand}`}
-              className="white-toggle"
-            />
+            <Navbar.Toggle aria-controls={`offcanvasNavbar-expand-${expand}`} />
             <Navbar.Offcanvas
               id={`offcanvasNavbar-expand-${expand}`}
               aria-labelledby={`offcanvasNavbarLabel-expand-${expand}`}
@@ -37,27 +47,48 @@ const TopNav = () => {
               </Offcanvas.Header>
               <Offcanvas.Body>
                 <Nav className="justify-content-end flex-grow-1 pe-3">
-                  {menuData.map((item) => (
-                    <NavLink
-                      className="nav-link"
-                      href={item.path}
-                      key={item.name}
-                    >
-                      <div className="list-item">{item.name}</div>
-                    </NavLink>
-                  ))}
+                  {currentUser ? (
+                    <div className="profile-side">
+                      <img
+                        src={
+                          currentUser?.profilePic
+                            ? `http://localhost:8000/images/${currentUser.profilePic}`
+                            : "/nouser.png"
+                        }
+                        alt=""
+                        className="profile-img"
+                      ></img>
+                      <NavDropdown
+                        title={currentUser.name}
+                        id="basic-nav-dropdown"
+                      >
+                        <NavDropdown.Item href="/profile">
+                          Profile
+                        </NavDropdown.Item>
+                        <NavDropdown.Item href="/logout">
+                          Logout
+                        </NavDropdown.Item>
+                      </NavDropdown>
+                    </div>
+                  ) : (
+                    <>
+                      {menuData.map((item) => (
+                        <NavLink
+                          className="nav-link"
+                          href={item.path}
+                          key={item.name}
+                        >
+                          <div className="list-item">{item.name}</div>
+                        </NavLink>
+                      ))}
+                    </>
+                  )}
                   <NavDropdown
-                    title="Dropdown"
+                    title="Türkçe"
                     id={`offcanvasNavbarDropdown-expand-${expand}`}
+                    className="navDropdown"
                   >
-                    <NavDropdown.Item href="#action3">Action</NavDropdown.Item>
-                    <NavDropdown.Item href="#action4">
-                      Another action
-                    </NavDropdown.Item>
-                    <NavDropdown.Divider />
-                    <NavDropdown.Item href="#action5">
-                      Something else here
-                    </NavDropdown.Item>
+                    <NavDropdown.Item href="#action3">English</NavDropdown.Item>
                   </NavDropdown>
                 </Nav>
               </Offcanvas.Body>
