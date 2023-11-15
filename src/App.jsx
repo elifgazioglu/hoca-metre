@@ -6,9 +6,11 @@ import Home from "../src/pages/home/Home"
 import Login from "../src/pages/login/Login"
 import Register from "../src/pages/register/Register"
 import Profile from "../src/pages/profile/Profile"
+import Teachers from "../src/pages/teachers/Teachers"
+import 'mdb-react-ui-kit/dist/css/mdb.min.css';
+import "@fortawesome/fontawesome-free/css/all.min.css";
 
 import { createBrowserRouter, RouterProvider, Outlet } from "react-router-dom";
-// import PrivateRoute from "./PrivateRoute";
 
 function App() {
   const Layout = () => {
@@ -39,8 +41,12 @@ function App() {
           element: <Register />,
         },
         {
-          path: "/profil",
+          path: "/profile",
           element: <Profile />,
+        },
+        {
+          path: "/teachers",
+          element: <Teachers />,
         },
         // {
         //   path: "/egitmen-profili",
