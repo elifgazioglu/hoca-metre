@@ -7,6 +7,7 @@ import Login from "../src/pages/login/Login"
 import Register from "../src/pages/register/Register"
 import Profile from "../src/pages/profile/Profile"
 import Teachers from "../src/pages/teachers/Teachers"
+import AddTeacher from "../src/pages/addTeacher/AddTeacher"
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import "@fortawesome/fontawesome-free/css/all.min.css";
 
@@ -47,6 +48,10 @@ function App() {
         {
           path: "/teachers",
           element: <Teachers />,
+        },
+        {
+          path: "/add-teacher",
+          element: <AddTeacher />,
         },
         // {
         //   path: "/egitmen-profili",
