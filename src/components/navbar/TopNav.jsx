@@ -7,24 +7,48 @@ import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import Offcanvas from "react-bootstrap/Offcanvas";
 import NavLink from "react-bootstrap/esm/NavLink";
-import { useEffect } from "react";
+import { Link, useNavigate } from "react-router-dom";
+import Cookies from "js.cookie";
+import { useEffect, useState } from "react";
 
 const TopNav = () => {
   const menuData = [
     { path: "/", name: "Home" },
     { path: "/login", name: "Login" },
     { path: "/register", name: "Register" },
+    { path: "/add-teacher", name: "AddTeacher" },
   ];
+
+  const navigate = useNavigate();
 
   useEffect(() => {
     const fetchUserData = async () => {
       try {
         const res = await axios.get(`http://localhost:8000/api/auth/email`);
-      } catch (err) {}
+      } catch (err) {
+        console.log(err)
+      }
     };
   });
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
+
+  const handleLogout = async () => {
+    try{
+      await axios.post(
+        `http://localhost:8000/api/auth/logout`,
+        null,
+        {
+          withCredentials: true,
+        }
+      );
+      Cookies.remove("accessToken");
+      localStorage.removeItem("currentUser");
+      localStorage.removeItem("user")
+    } catch(err){
+      console.log(err);
+    }
+  }
 
   return (
     <>
@@ -65,7 +89,10 @@ const TopNav = () => {
                         <NavDropdown.Item href="/profile">
                           Profile
                         </NavDropdown.Item>
-                        <NavDropdown.Item href="/logout">
+                        <NavDropdown.Item href="/add-teacher">
+                          Add Teacher
+                        </NavDropdown.Item>
+                        <NavDropdown.Item href="/" onClick={handleLogout}>
                           Logout
                         </NavDropdown.Item>
                       </NavDropdown>
