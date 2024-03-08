@@ -1,72 +1,55 @@
-import React from "react";
-import {
-  MDBCol,
-  MDBContainer,
-  MDBRow,
-  MDBCard,
-  MDBCardTitle,
-  MDBCardText,
-  MDBCardBody,
-  MDBCardImage,
-  MDBBtn,
-} from "mdb-react-ui-kit";
+import React, { useEffect, useState } from "react";
+import "./Teachers.scss";
+import axios from "axios";
+import { Link } from "react-router-dom";
 
-export default function Basic() {
+export default function Teachers() {
+  const [teachers, setTeachers] = useState([]);
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    
-  }
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const res = await axios.get(`http://localhost:8000/api/teachers`, {
+          withCredentials: true,
+        });
+        setTeachers(res.data);
+        console.log(res.data);
+      } catch (err) {
+        console.log(err);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
-    <div className="vh-100" style={{ backgroundColor: "#9de2ff" }}>
-      <MDBContainer>
-        <MDBRow className="justify-content-center">
-          <MDBCol md="9" lg="7" xl="5" className="mt-5">
-            <MDBCard style={{ borderRadius: "15px" }}>
-              <MDBCardBody className="p-4">
-                <div className="d-flex text-black">
-                  <div className="flex-shrink-0">
-                    <MDBCardImage
-                      style={{ width: "180px", borderRadius: "10px" }}
-                      src="https://mdbcdn.b-cdn.net/img/Photos/new-templates/bootstrap-profiles/avatar-1.webp"
-                      alt="Generic placeholder image"
-                      fluid
-                    />
-                  </div>
-                  <div className="flex-grow-1 ms-3">
-                    <MDBCardTitle>Danny McLoan</MDBCardTitle>
-                    <MDBCardText>Senior Journalist</MDBCardText>
-
-                    <div
-                      className="d-flex justify-content-start rounded-3 p-2 mb-2" 
-                      style={{ backgroundColor: "#efefef" }}
-                    >
-                      <div>
-                        <p className="small text-muted mb-1">Articles</p>
-                        <p className="mb-0">41</p>
-                      </div>
-                      <div className="px-3">
-                        <p className="small text-muted mb-1">Followers</p>
-                        <p className="mb-0">976</p>
-                      </div>
-                      <div>
-                        <p className="small text-muted mb-1">Rating</p>
-                        <p className="mb-0">8.5</p>
-                      </div>
-                    </div>
-                    <div className="d-flex pt-1">
-                      <MDBBtn outline className="me-1 flex-grow-1">
-                        Chat
-                      </MDBBtn>
-                      <MDBBtn className="flex-grow-1">Follow</MDBBtn>
-                    </div>
-                  </div>
-                </div>
-              </MDBCardBody>
-            </MDBCard>
-          </MDBCol>
-        </MDBRow>
-      </MDBContainer>
+    <div className="teachers-container">
+      <div className="teachers-header-div">
+        <div className="teachers-title x">EĞİTMENLER</div>
+      </div>
+      <div className="teachers-list">
+        {teachers.map((teacher) => (
+          <div key={teacher._id} className="teacher-item">
+            <Link to={`/egitmenler/${teacher.slug}`} className="teacher-link">
+              <img
+                className="teachers-img"
+                src={
+                  teacher?.profilePic
+                    ? `${import.meta.env.VITE_BACKEND_URL}/images/${
+                        teacher.profilePic
+                      }`
+                    : "/nouser.png"
+                }
+                alt=""
+              />
+              <div className="teacher-information">
+                <div className="teacher-name">{teacher.name}</div>
+                <div className="teacher-lastname">{teacher.lastName}</div>
+              </div>
+            </Link>
+          </div>
+        ))}
+      </div>
     </div>
   );
 }
