@@ -49,6 +49,14 @@ const Register = () => {
           `http://localhost:8000/api/auth/register`,
           formData
         );
+        const loginResponse = await axios.post(
+          `http://localhost:8000/api/auth/login`,
+        formData,
+        {
+          withCredentials: true,
+        }
+        );
+        localStorage.setItem("currentUser", JSON.stringify(res.data));
         setFormData({ name: "", lastName: "", email: "", password: "" });
         navigate("/");
         console.log(res.data);
