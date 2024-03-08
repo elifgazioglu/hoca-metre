@@ -1,0 +1,30 @@
+.addTeacher {
+    width: 100%;
+    max-width: 400px;
+    margin: 0 auto;
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        padding: 20px;
+        border: 1px solid #ccc;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+        }
+        
+        label{
+            display: flex;
+            flex-direction: column;
+            margin-bottom: 15px;
+
+            input{
+                margin-bottom: 10px;
+            }
+        }
+    }
+}
