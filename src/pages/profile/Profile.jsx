@@ -26,15 +26,12 @@ const Profile = () => {
         lastName: profileData.lastName,
         profilePic: profileData.profilePic,
       };
-      
-
       if (selectedFile) {
         const formData = new FormData();
         const filename = Date.now() + selectedFile.name;
         formData.append("name", filename);
         formData.append("file", selectedFile);
         updatedData.profilePic = filename;
-        
         try {
           await axios.post(`http://localhost:8000/api/upload`, formData, {
             withCredentials: true,
@@ -43,7 +40,6 @@ const Profile = () => {
           console.log(error);
         }
       }
-
       const res = await axios.put(
         `http://localhost:8000/api/user`,
         updatedData,
@@ -77,9 +73,11 @@ const Profile = () => {
         <img
           src={
             selectedFile
-              ? URL.createObjectURL(selectedFile)
-              : `http://localhost:8000/images/${profileData?.profilePic}`
-          }
+                ? URL.createObjectURL(selectedFile)
+                : (profileData?.profilePic
+                    ? `http://localhost:8000/images/${profileData.profilePic}`
+                    : "/nouser.png")
+        }
           alt=""
         />
       </div>
