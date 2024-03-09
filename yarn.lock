@@ -6438,6 +6438,11 @@ js-yaml@^4.1.0:
   dependencies:
     argparse "^2.0.1"
 
+js.cookie@^0.0.4:
+  version "0.0.4"
+  resolved "https://registry.npmjs.org/js.cookie/-/js.cookie-0.0.4.tgz#c581270d0403b1c5125f91d5a48295e290e2869a"
+  integrity sha512-JvMf313wUqGW72zt5SoIo+Af0ZV4UwE8fl7j39nGwTCFQ4ZeAunvlD40/bCPGE1C3Yyl6y0E/M0sbM65ekx1Mw==
+
 jsdom@^16.6.0:
   version "16.7.0"
   resolved "https://registry.npmjs.org/jsdom/-/jsdom-16.7.0.tgz#918ae71965424b197c819f8183a754e18977b710"
