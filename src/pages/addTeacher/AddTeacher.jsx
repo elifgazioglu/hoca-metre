@@ -26,7 +26,7 @@ const AddTeacher = () => {
         user,
         { withCredentials: true }
       )
-      navigate("/add-teacher");
+      window.location.reload();
     } catch(err){
       console.log(err);
     }
