@@ -29,7 +29,8 @@ const TopNav = () => {
         console.log(err)
       }
     };
-  });
+    fetchUserData();
+  }, []);
 
   const currentUser = JSON.parse(localStorage.getItem("currentUser"));
 
