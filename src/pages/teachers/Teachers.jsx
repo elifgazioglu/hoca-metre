@@ -9,7 +9,7 @@ export default function Teachers() {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const res = await axios.get(`http://localhost:8000/api/teachers`, {
+        const res = await axios.get(`http://localhost:8000/api/teachers?active=true`, {
           withCredentials: true,
         });
         setTeachers(res.data);
