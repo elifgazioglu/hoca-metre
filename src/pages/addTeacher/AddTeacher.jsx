@@ -10,6 +10,7 @@ const AddTeacher = () => {
     university: "",
     faculty: "",
     department: "",
+    active: false
   });
 
   const handleChange = (e) => {
