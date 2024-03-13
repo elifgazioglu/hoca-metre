@@ -73,11 +73,11 @@ const Profile = () => {
         <img
           src={
             selectedFile
-                ? URL.createObjectURL(selectedFile)
-                : (profileData?.profilePic
-                    ? `http://localhost:8000/images/${profileData.profilePic}`
-                    : "/nouser.png")
-        }
+              ? URL.createObjectURL(selectedFile)
+              : profileData?.profilePic
+              ? `http://localhost:8000/images/${profileData.profilePic}`
+              : "/nouser.png"
+          }
           alt=""
         />
       </div>
